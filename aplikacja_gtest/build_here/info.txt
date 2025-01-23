@@ -1,0 +1,2 @@
+This is folder where cmake can be used by typing "cmake .." in cmd.
+For more info read readme file in main folder of repository.

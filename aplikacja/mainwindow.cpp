@@ -30,8 +30,12 @@ void MainWindow::on_zapisz_pressed()
 
     string error = "";
 
+    if (ui->street_number->text().toInt()==0) {
+        error += "Numer domu musi być liczbą!\n";
+    }
+
     if (x.phone_number < 111111111 || x.phone_number>999999999) {
-        error += "Wpisz poprawny numer telefony!\n";
+        error += "Wpisz poprawny numer telefonu!\n";
     }
 
     if (x.name == "" || x.surname == "" || x.street == "" || x.city == "" || x.country == "" || x.email == "") {
@@ -97,8 +101,12 @@ void MainWindow::on_wyszukaj_pressed()
 
     string error = "";
 
+    if (ui->street_number->text().toInt()==0) {
+        error += "Numer domu musi być liczbą!\n";
+    }
+
     if ((x.phone_number < 111111111 || x.phone_number>999999999)&&ui->phone_numberbox->isChecked()) {
-        error += "Wpisz poprawny numer telefony!\n";
+        error += "Wpisz poprawny numer telefonu!\n";
     }
 
     if ((x.name == ""&& ui->namebox->isChecked()) ||  (x.surname == ""&& ui->surnamebox->isChecked()) || (x.street == ""&&ui->streetbox->isChecked()) || (x.city == ""&&ui->citybox->isChecked())
@@ -193,7 +201,7 @@ void MainWindow::on_pushButton_pressed()
 {
     QString plik = QFileDialog::getOpenFileName(this,tr("Otwórz"), "/home", tr("*.txt"));
     if(plik==nullptr){
-        QMessageBox::warning(this,"błąd","nie udało się odczytać pliku");
+        QMessageBox::warning(this,"błąd","nie udało się odczytać pliku!");
     }else{
         string y{};
         std::ifstream p(plik.toStdString());
@@ -216,7 +224,7 @@ void MainWindow::on_pushButton_2_pressed()
     if(ui->spinBox->value()>=0||ui->spinBox->value()<=base.size()){
     QString plik = QFileDialog::getSaveFileName(this, tr("Save File"), "/home", tr("(*.txt)"));
         if(plik==nullptr){
-            QMessageBox::warning(this,"błąd","nie udało się zapisać pliku");
+            QMessageBox::warning(this,"błąd","nie udało się zapisać pliku!");
         }else{
             string y{};
             std::ofstream p(plik.toStdString());

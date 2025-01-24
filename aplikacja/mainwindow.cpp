@@ -101,7 +101,7 @@ void MainWindow::on_wyszukaj_pressed()
 
     string error = "";
 
-    if (ui->street_number->text().toInt()==0) {
+    if (ui->street_number->text().toInt()==0 && ui->street_numberbox->isChecked()) {
         error += "Numer domu musi być liczbą!\n";
     }
 
@@ -111,7 +111,7 @@ void MainWindow::on_wyszukaj_pressed()
 
     if ((x.name == ""&& ui->namebox->isChecked()) ||  (x.surname == ""&& ui->surnamebox->isChecked()) || (x.street == ""&&ui->streetbox->isChecked()) || (x.city == ""&&ui->citybox->isChecked())
         || (x.country == ""&&ui->countrybox->isChecked()) || (x.email == "" && ui->emailbox->isChecked())) {
-        error += "Wypełnij wszystkie pozycje!\n";
+        error += "Wypełnij wymagane pozycje!\n";
     }
 
     int h {0};
@@ -129,6 +129,9 @@ void MainWindow::on_wyszukaj_pressed()
                 text += ", ";
             }
             text += std::to_string(i+1);
+        }
+        if(text==""){
+            text = "brak";
         }
         QMessageBox::warning(this,"informacja",QString::fromStdString("znaleziono następujące rekordy:\n"+text));
         ui->textBrowser->setText(QString::fromStdString(text));
